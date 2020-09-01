@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './question.dart';
+import './answer.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,13 +14,14 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var currentIndex = 0;
-  var questions = ["first", "second", "third"];
+  var questions = ["none", "first", "second", "third"];
 
-  void _answerQuestion(BuildContext context, String name, int index) {
+  void _answerQuestion() {
     setState(() {
-      currentIndex = index;
+      if (currentIndex <= questions.length - 1) {
+        currentIndex += 1;
+      }
     });
-    print(name);
   }
 
   @override
@@ -32,18 +34,9 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: [
             QuestionText('some questions:'),
-            RaisedButton(
-              child: Text(questions[0]),
-              onPressed: () => _answerQuestion(context, "A", 0),
-            ),
-            RaisedButton(
-              child: Text('Alternative B'),
-              onPressed: () => _answerQuestion(context, "B", 1),
-            ),
-            RaisedButton(
-              child: Text('Alternative C'),
-              onPressed: () => _answerQuestion(context, "C", 2),
-            ),
+            AnswerButton("Answer A", _answerQuestion),
+            AnswerButton("Answer B", _answerQuestion),
+            AnswerButton("Answer C", _answerQuestion),
             QuestionText('choice picked: ${questions[currentIndex]}'),
           ],
         ),
