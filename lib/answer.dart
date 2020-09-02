@@ -10,6 +10,7 @@ class AnswerButton extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: RaisedButton(
+        textColor: Colors.white,
         color: Colors.blueAccent,
         child: Text(title),
         onPressed: ourCallback,
