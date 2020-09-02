@@ -14,9 +14,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var currentIndex = 0;
-  var questions = ["none", "first", "second", "third"];
-
-  var questions2 = [
+  var questions = [
     {
       "question": "Whats your favorite color?",
       'answers': ["Blue", "Green", "White"]
@@ -45,7 +43,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    var currentQuestionMap = questions2[currentIndex];
+    var currentQuestionMap = questions[currentIndex];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
