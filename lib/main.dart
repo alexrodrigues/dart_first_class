@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/quiz.dart';
 
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import './result.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,51 +14,68 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var currentIndex = 0;
-  var questions = [
+  var _currentIndex = 0;
+  var _totalScore = 0;
+  var _questions = const [
     {
       "question": "Whats your favorite color?",
-      'answers': ["Blue", "Green", "White"]
+      'answers': [
+        {"title": "Blue", "score": 10},
+        {"title": "Green", "score": 20},
+        {"title": "White", "score": 30}
+      ]
     },
     {
       "question": "Whats the model of your first car?",
-      'answers': ["Ford", "Tesla", "Audi"]
+      'answers': [
+        {"title": "Ford", "score": 10},
+        {"title": "Tesla", "score": 20},
+        {"title": "Audi", "score": 30}
+      ]
     },
     {
       "question": "Whats your computer model?",
-      'answers': ["iMac", "MacBook Pro", "White"]
+      'answers': [
+        {"title": "iMac", "score": 10},
+        {"title": "MacBook Pro", "score": 20},
+        {"title": "White", "score": 30}
+      ]
     },
     {
       "question": "Whats your phone model?",
-      'answers': ["iPhone", "Xiaomi", "Google Pixel"]
+      'answers': [
+        {"title": "iPhone", "score": 10},
+        {"title": "Xiaomi", "score": 20},
+        {"title": "Google Pixel", "score": 30}
+      ]
     }
   ];
 
-  void _answerQuestion() {
+  void _answerQuestion(int score) {
     setState(() {
-      if (currentIndex <= questions.length - 1) {
-        currentIndex += 1;
-      }
+      _totalScore += score;
+      _currentIndex += 1;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    var currentQuestionMap = questions[currentIndex];
+    var _currentQuestionMap = _questions[_currentIndex];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('Quiz'),
         ),
-        body: Column(
-          children: [
-            QuestionText(currentQuestionMap['question']),
-            ...(currentQuestionMap['answers'] as List<String>).map((answer) {
-              return AnswerButton(answer, _answerQuestion);
-            }),
-          ],
-        ),
+        body: (_currentIndex < _questions.length - 1)
+            ? Quiz(_currentQuestionMap, _answerQuestion)
+            : Result(_totalScore),
       ),
     );
   }
+
+  /* 
+    to send parameters to a function refere you should 
+    use: 
+    Quiz(_currentQuestionMap, (parameter) => answerQuestion(parameter))
+  */
 }

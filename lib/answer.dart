@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AnswerButton extends StatelessWidget {
-  final Function ourCallback;
+  final Function _ourCallback;
   final String title;
-  AnswerButton(this.title, this.ourCallback);
+  AnswerButton(this.title, this._ourCallback);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class AnswerButton extends StatelessWidget {
         textColor: Colors.white,
         color: Colors.blueAccent,
         child: Text(title),
-        onPressed: ourCallback,
+        onPressed: _ourCallback,
       ),
     );
   }
