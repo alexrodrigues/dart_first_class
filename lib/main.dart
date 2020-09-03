@@ -58,6 +58,13 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void _reset() {
+    setState(() {
+      _totalScore = 0;
+      _currentIndex = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var _currentQuestionMap = _questions[_currentIndex];
@@ -68,7 +75,7 @@ class _MyAppState extends State<MyApp> {
         ),
         body: (_currentIndex < _questions.length - 1)
             ? Quiz(_currentQuestionMap, _answerQuestion)
-            : Result(_totalScore),
+            : Result(_totalScore, _reset),
       ),
     );
   }
